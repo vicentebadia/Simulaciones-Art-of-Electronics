@@ -1,0 +1,18 @@
+* C:\Libros Técnicos\Electrónica\Simulaciones Art of Electronics\02_16 - AC coupled emitter follower.asc
+R1 N001 N002 130K
+R2 N002 0 150K
+C1 N002 V_in 0.5µ
+V1 V_in 0 SINE(0 6 1K)
+V2 N001 0 15
+Q2 N001 N002 N003 0 2N2222
+R3 N003 0 7.5K
+C2 V_out N003 3.3µ
+.model NPN NPN
+.model PNP PNP
+.lib C:\PROGRA~2\LTC\LTSPIC~1\lib\cmp\standard.bjt
+.tran 10m
+* Figure 2.16. An ac-coupled emitter follower.\nNote base bias voltage divider.
+* Emitter follower design example\nAs an actual design example, let's make an\nemitter follower for audio signals (20Hz to\n20kHz). Vcc is +15 volts, and quiescent\ncurrent is to be 1 mA.\n \nStep 1. Choose VE. For the largest possible\nsymmetrical swing without clipping, VE =\n0.5Vcc, or +7.5 volts.\nStep 2. Choose RE. For a quiescent\ncurrent of lmA, RE = 7.5k.\nStep 3. Choose R1 and Rz. Vg is VE+\n0.6, or 8.1 volts. This determines the ratio\nof R1 to R2 as 1: 1.17. The preceding\nloading criterion requires that the parallel\nresistance of R1 and R2 be about 75k\nor less (one-tenth of 7.5k times hFE).\nSuitable standard values are R1 = 130k,\nR2 = 150k.
+* Step 4. Choose C1. C1 forms a high-pass\nfilter with the impedance it sees as a load,\nnamely the impedance looking into the\nbase in parallel with the impedance looking\ninto the base voltage divider. If we\nassume that the load this circuit will drive\nis large compared with the emitter resistor,\nthen the impedance looking into the base\nis hFERE, about 750k. The divider looks\nlike 70k. So the capacitor sees a load of\nabout 63k, and it should have a value of\nat least 0.1 5pF so that the 3dB point will\nbe below the lowest frequency of interest,\n20Hz.\nStep 5. Choose C2. C2 forms a highpass\nfilter in combination with the load\nimpedance, which is unknown. However,\nit is safe to assume that the load impedance\nwon't be smaller than RE, which gives a\nvalue for Cz of at least 1.OpF to put the\n3dB point below 20Hz. Because there are\nnow two cascaded high-pass filter sections,\nthe capacitor values should be increased\nsomewhat to prevent large attenuation\n(reduction of signal amplitude, in this case\n6dB) at the lowest frequency of interest.\nC1 = 0.5pF and Cz = 3.3pF might be\ngood choices.
+.backanno
+.end
